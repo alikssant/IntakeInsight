@@ -1,6 +1,6 @@
 class CalorieTracker{
     constructor(){
-        this._calorieLimit = 1900
+        this._calorieLimit = 2000
         this._totalCalories = 0
         this._meals = []
         this._workouts = []
@@ -18,12 +18,14 @@ class CalorieTracker{
     addMeal(meal){
         this._meals.push(meal)
         this._totalCalories += meal.calories
+        this._displayNewMeal(meal)
         this._render()
     }
 
     addWorkout(workout){
         this._workouts.push(workout)
         this._totalCalories -= workout.calories
+        this._displayNewWorkout(workout)
         this._render()
     }
 
@@ -81,6 +83,55 @@ class CalorieTracker{
         progressEl.style.width = `${width}%`
     }
 
+    _displayNewMeal(meal){
+        const mealsEl = document.getElementById('meal-items')
+        const mealEl = document.createElement('div')
+        mealEl.classList.add('card', 'my-2')
+        mealEl.setAttribute('data-id', meal.id)
+        mealEl.innerHTML = `
+          <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                  <h4 class="mx-1">${meal.name}</h4>
+                  <div
+                    class="fs-1 bg-primary text-white text-center rounded-2 px-2 px-sm-5"
+                  >
+                    ${meal.calories}
+                  </div>
+                  <button class="delete btn btn-danger btn-sm mx-2">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+        `
+        mealsEl.appendChild(mealEl)
+
+    }
+
+
+    _displayNewWorkout(workout){
+        const workoutsEl = document.getElementById('workout-items')
+        const workoutEl = document.createElement('div')
+        workoutEl.classList.add('card', 'my-2')
+        workoutEl.setAttribute('data-id', workout.id)
+        workoutEl.innerHTML = `
+          <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                  <h4 class="mx-1">${workout.name}</h4>
+                  <div
+                    class="fs-1 bg-secondary text-white text-center rounded-2 px-2 px-sm-5"
+                  >
+                    ${workout.calories}
+                  </div>
+                  <button class="delete btn btn-danger btn-sm mx-2">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+        `
+        workoutsEl.appendChild(workoutEl)
+
+    }
+
 
     _render(){
         this._displayCaloriesTotal()
@@ -108,18 +159,45 @@ class Workout{
     }
 }
 
-const tracker = new CalorieTracker()
 
-const breakfast = new Meal('Breakfast', 400)
-const lunch = new Meal('Lunch', 470)
-const dinner = new Meal('Dinner', 299)
-tracker.addMeal(breakfast)
-tracker.addMeal(lunch)
-tracker.addMeal(dinner)
+class App{
+    constructor(){
+        this._tracker = new CalorieTracker()
 
-const run = new Workout('Morning Run', 521)
-tracker.addWorkout(run)
+        document.getElementById('meal-form').addEventListener('submit', this._newItem.bind(this, 'meal'))
+        document.getElementById('workout-form').addEventListener('submit', this._newItem.bind(this, 'workout'))
+    }
 
-console.log(tracker._meals)
+    _newItem(type, e){
+        e.preventDefault()
 
+        const name = document.getElementById(`${type}-name`)
+        const calories = document.getElementById(`${type}-calories`)
+
+        //Validate inputs
+        if (name.value === "" || calories.value === "") {
+            alert("Please fill all fields")
+            return
+        }
+
+        if (type === 'meal') {
+            const meal = new Meal(name.value, parseInt(calories.value))
+            this._tracker.addMeal(meal)
+        }
+        else
+        {
+            const workout = new Workout(name.value, parseInt(calories.value))
+            this._tracker.addWorkout(workout)
+        }
+        name.value = ''
+        calories.value = ''
+
+        const collapseItem = document.getElementById(`collapse-${type}`)
+        const bsCollapse = new bootstrap.Collapse(collapseItem,{
+            toggle: true
+        } )
+}
+
+}
+const app = new App()
 
