@@ -6,10 +6,6 @@ This project is built using JavaScript,with class-based structure,
 Bootstrap for styling
 Webpack for managing JavaScript files.
 
-
-### Project Overview
-IntakeInsight is a JavaScript-based web app that tracks calories eaten and burned. It allows users to manage their meals and workouts easily. The app is structured using multiple JavaScript classes to ensure code modularity and maintainability.
-
 ### Features
 - Meal Tracking: Add and manage meals, tracking calories consumed.
 - Workout Tracking: Track workouts, monitoring calories burned.
