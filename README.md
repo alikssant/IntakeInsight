@@ -13,7 +13,7 @@ Webpack for managing JavaScript files.
 - Responsive Design: Styled using Bootstrap for a responsive user interface.
 - Class-based Structure: The project uses JavaScript classes for better code organization.
 
-- Live Site URL: [IntakeInsight-demo](https://moonlit-biscuit-3b7223.netlify.app/)
+# Live Site URL:  [IntakeInsight-demo](https://moonlit-biscuit-3b7223.netlify.app/)
 
 
 ### Technologies Used
