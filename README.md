@@ -31,11 +31,11 @@ Webpack for managing JavaScript files.
 Install dependencies using npm:
 
 
-### npm install
+### [npm install]()
 Build the project with Webpack:
 
 
-### npm run build
+### [npm run build]()
 
 
 Open the index.html file in your browser to view the app.
