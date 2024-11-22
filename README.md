@@ -1,5 +1,9 @@
-ntakeInsight - Calorie Tracking Web App
-Welcome to IntakeInsight, a calorie tracking web application that helps you monitor your daily calorie intake and expenditure. This project is built using JavaScript, leveraging a class-based structure, Bootstrap for styling, and Webpack for managing JavaScript files.
+###IntakeInsight - Calorie Tracking Web App
+Welcome to IntakeInsight, 
+a calorie tracking web application that helps you monitor your daily calorie intake and expenditure. 
+This project is built using JavaScript,with class-based structure, 
+Bootstrap for styling
+Webpack for managing JavaScript files.
 
 
 Project Overview
